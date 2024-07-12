@@ -38,14 +38,14 @@ const Login = () => {
 
   return (
     <>
-      <div className="bg-bgColor-100 w-screen h-screen lg:flex flex flex-wrap-reverse justify-center items-center lg:bg-backgroundDesign bg-backgroundDesignSm bg-center bg-cover bg-no-repeat">
+      <div className="bg-bgColor-100 w-screen h-screen lg:flex flex flex-wrap-reverse justify-center items-center">
         <div className="lg:h-4/5 lg:w-1/2 w-full h-1/2 flex justify-center items-center">
           <form
             className="bg-bgColor-200 lg:h-3/5 p-5 text-textColor-100 lg:w-3/5 w-4/5 rounded-lg lg:shadow-lg shadow-sm"
             onSubmit={handleSubmit}
           >
             <h1 className="text-center lg:text-4xl lg:mb-8 lg:mt-2 font-sans text-2xl">
-              Sign in to your acoount
+              Sign in
             </h1>
             <div className="flex justify-center lg:my-7 my-7">
               <input
@@ -72,12 +72,6 @@ const Login = () => {
               >
                 Sign in
               </button>
-            </div>
-            <div className="flex justify-center lg:my-7 my-7">
-              <h1 className="lg:text-xl font-serif">
-                {/* <Link to="/forgetPassword"> Forget Password ?</Link> */}
-                ←- Welcome to Payroll Central -→
-              </h1>
             </div>
           </form>
         </div>

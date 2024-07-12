@@ -28,7 +28,9 @@ function Home() {
             to="/home/"
             className="h-10% lg:p-3 p-2 flex justify-center items-center"
           >
-            <div className="lg:block block lg:bg-logoIcon bg-logoIconSm lg:w-70% w-90% lg:h-full bg-no-repeat bg-center bg-cover p-5"></div>
+            <div className="lg:block block lg:w-70% w-90% lg:h-full p-5">
+              
+            </div>
           </Link>
           <div className="h-80% lg:p-3 p-2 flex flex-col gap-4">
             <Link
