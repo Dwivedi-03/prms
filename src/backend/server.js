@@ -16,28 +16,28 @@ server.get("/msg", (req, res) => {
 
 // For login
 server.post("/auth", async (req, res) => {
-  const userId = req.body.fname;
+  const userName = req.body.fname;
   const userPassword = req.body.password;
 
-  if (userId === "admin" && userPassword === "admin") {
+  if (userName === "admin" && userPassword === "admin") {
     res.json({
       status: true,
       fname: "Admin",
       user: "Admin",
     });
   } else {
-    const user = await Employee.findOne({
-      $and: [{ firstName: "Nikita" }, { password: "nikita03" }],
+    const employee = await Employee.findOne({
+      $and: [{ fname: userName }, { password: userPassword }],
     });
-    if (user !== null) {
+    if (employee !== null) {
       res.status(200).json({
         status: true,
-        fname: "Nikita",
+        fname: employee.fname,
         user: "Employee",
+        id: employee.emp_id,
       });
     } else {
-      console.log("Sended false");
-      res.send(false);
+      res.json({ status: false });
     }
   }
 });

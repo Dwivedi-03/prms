@@ -32,7 +32,7 @@ const Login = () => {
     } else if (data.status === true && data.user === "Employee") {
       navigate("/Dashboard");
     } else {
-      console.log(`Invalid Username and Password!`);
+      alert(`Invalid Username and Password!`);
     }
   };
 
