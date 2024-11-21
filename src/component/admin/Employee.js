@@ -27,7 +27,7 @@ const Employee = ({ Employees, setEmployees }) => {
                   <th className="table-cell w-10% p-1">Salary</th>
                 </tr>
               </thead>
-              {/* <tbody>
+              <tbody>
                 {Employees.map((items) => {
                   return (
                     <tr className="text-center table-row odd:bg-bgColor-200 even:bg-bgColor-300">
@@ -36,9 +36,9 @@ const Employee = ({ Employees, setEmployees }) => {
                       <td className="table-cell w-10% p-1">{items.lname}</td>
                       <td className="table-cell w-10% p-1">{items.email}</td>
                       <td className="table-cell w-10% p-1">{items.phone}</td>
-                      <td  className="table-cell w-10% p-1">{items.dob}</td>
+                      {/* <td  className="table-cell w-10% p-1">{items.dob}</td> */}
                       <td className="table-cell w-10% p-1">{items.gender}</td>
-                      <td  className="table-cell w-10% p-1">{items.hire_date}</td>
+                      {/* <td  className="table-cell w-10% p-1">{items.hire_date}</td> */}
                       <td className="table-cell w-10% p-1">
                         {items.job_title}
                       </td>
@@ -46,7 +46,7 @@ const Employee = ({ Employees, setEmployees }) => {
                     </tr>
                   );
                 })}
-              </tbody> */}
+              </tbody>
             </table>
           </div>
         </div>

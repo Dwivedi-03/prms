@@ -24,7 +24,7 @@ module.exports = {
         },
       },
       backgroundImage: {
-        backgroundDesign: "url(/src/img/blob-scene-haikei.svg)",
+        backgroundDesign: "url(/src/img/background.jpg)",
         backgroundDesignSm: "url(/src/img/blob-scene-haikei-sm.svg)",
         logoIcon: "url(/src/img/logoIcon.svg)",
         logoIconSm: "url(/src/img/logoIconSm.png)",

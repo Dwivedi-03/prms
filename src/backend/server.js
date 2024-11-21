@@ -125,6 +125,18 @@ server.post("/add", async (req, res) => {
   }
 });
 
+// To get employee data using id
+server.post("/employeeData", async (req, res) => {
+  const emp_id = req.body.emp_id;
+  const employee = await Employee.findOne({ emp_id: emp_id });
+
+  if (employee !== null) {
+    res.send(employee);
+  } else {
+    res.send(false);
+  }
+});
+
 // To count Employee and total salary
 server.post("/countUser", async (req, res) => {
   const count = await Employee.countDocuments();
@@ -134,6 +146,9 @@ server.post("/countUser", async (req, res) => {
 
   const salaryCount = totalSalary[0].total_salary;
   res.status(200).json({ count: count, salary: salaryCount });
+
+  console.log(salaryCount);
+  console.log(count);
 });
 
 // To find all employees data
@@ -177,18 +192,14 @@ server.post("/delete", async (req, res) => {
 
     const deletedEmployee = await employee.deleteOne();
     if (deletedEmployee._id !== "") {
-      res.json({ status: true });
+      res.json({ status: true, message: "Data deleted successfully!" });
     } else {
-      res.json({
-        status: false,
-        message: "Employee does not exists!",
-      });
+      res.json({ status: false, message: "Employee does not exists!" });
     }
   } catch (error) {
-    res.status(500).json({
-      status: false,
-      message: "Error while deleting data!",
-    });
+    res
+      .status(500)
+      .json({ status: false, message: "Error while deleting data!" });
   }
 });
 
@@ -200,10 +211,10 @@ connectToMongo()
     });
     server.on("error", (error) => {
       console.error(`Error : ${error}`);
-      throw error;
+      // throw error;
     });
   })
   .catch((err) => {
     console.log(`MongoDb connection failed : ${err}`);
-    throw err;
+    // throw err;
   });

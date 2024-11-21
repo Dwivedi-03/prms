@@ -2,7 +2,87 @@ import React, { useState } from "react";
 import EmployeeNavbar from "./EmployeeNavbar";
 import InfoIcon from "@mui/icons-material/Info";
 
-const ModifyEmployee = () => {
+const ModifyEmployee = ({ setEmployees }) => {
+  const [EmpId, setEmpId] = useState();
+  const [FormData, setFormData] = useState({ emp_id: EmpId });
+  const [EmployeeData, setEmployeeData] = useState({
+    fname: "",
+    lname: "",
+    email: "",
+    phone: "",
+    dob: "",
+    gender: "",
+    emp_id: "",
+    hire_date: "",
+    job_title: "",
+    salary: "",
+    password: "",
+  });
+
+  const handleChange = (e) => {
+    setEmployeeData({
+      ...EmployeeData,
+      [e.target.name]: e.target.value,
+    });
+    setFormData({
+      ...FormData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const EmployeeIdChange = (e) => {
+    setEmpId(Number(e.target.value));
+  };
+
+  const handleClick = async () => {
+    if (EmpId !== undefined) {
+      const response = await fetch("http://localhost:5000/employeeData", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify({ emp_id: EmpId }),
+      });
+
+      const data = await response.json();
+      if (data) {
+        setEmployeeData(data);
+      } else {
+        alert("Employee does not exist!");
+        setEmployeeData("");
+        document.getElementById("addEmployeeForm").reset();
+      }
+    } else {
+      alert("Please enter the employee id to get the data!");
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const response = await fetch("http://localhost:5000/update", {
+      headers: {
+        "Content-Type": "application/json",
+      },
+      method: "POST",
+      body: JSON.stringify(EmployeeData),
+    });
+    const data = await response.json();
+    if (data.status) {
+      alert(data.message);
+      document.getElementById("addEmployeeForm").reset();
+      const employeeResponse = await fetch("http://localhost:5000/employees", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+      });
+      const employeeData = await employeeResponse.json();
+      setEmployees(employeeData);
+    } else {
+      alert(data.message);
+    }
+  };
+
   return (
     <>
       <main className="flex justify-evenly items-center h-full w-full text-textColor-100">
@@ -13,10 +93,7 @@ const ModifyEmployee = () => {
               <h1 className="text-center lg:text-4xl text-xl h-10% mt-1 text-primary-200">
                 Change Information
               </h1>
-              <form
-                // onSubmit={handleSubmit}
-                id="addEmployeeForm"
-              >
+              <form onSubmit={handleSubmit} id="addEmployeeForm">
                 <fieldset className="lg:w-70% mb-5 w-95% pb-2 mx-auto border border-bgColor-200 flex justify-evenly items-center flex-col lg:rounded-md rounded">
                   <legend className="ml-5% text-textColor-200">
                     Employee Id
@@ -26,13 +103,13 @@ const ModifyEmployee = () => {
                       type="number"
                       placeholder="Employee Id"
                       name="email"
-                      // onChange={EmployeeIdChange}
-                      // value={EmpId}
+                      onChange={EmployeeIdChange}
+                      value={EmpId}
                       className="bg-bgColor-200 lg:w-60% w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                     <button
                       type="button"
-                      // onClick={handleClick}
+                      onClick={handleClick}
                       className="lg:w-20% w-90% bg-bgColor-200 text-base py-2 rounded shadow-md"
                     >
                       Get Data
@@ -55,16 +132,16 @@ const ModifyEmployee = () => {
                       type="text"
                       placeholder="First name"
                       name="fname"
-                      // value={EmployeeData.fname}
-                      // onChange={handleChange}
+                      value={EmployeeData.fname}
+                      onChange={handleChange}
                       className="bg-bgColor-200 lg:w-40% w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                     <input
                       type="text"
                       placeholder="Last name"
                       name="lname"
-                      // value={EmployeeData.lname}
-                      // onChange={handleChange}
+                      value={EmployeeData.lname}
+                      onChange={handleChange}
                       className="bg-bgColor-200 lg:w-40% w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                   </div>
@@ -74,8 +151,8 @@ const ModifyEmployee = () => {
                       type="text"
                       placeholder="@gmail.com"
                       name="email"
-                      // value={EmployeeData.email}
-                      // onChange={handleChange}
+                      value={EmployeeData.email}
+                      onChange={handleChange}
                       className="bg-bgColor-200 lg:w-90% w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                   </div>
@@ -85,8 +162,8 @@ const ModifyEmployee = () => {
                       type="number"
                       placeholder="+91 9876543210"
                       name="phone"
-                      // value={EmployeeData.phone}
-                      // onChange={handleChange}
+                      value={EmployeeData.phone}
+                      onChange={handleChange}
                       className="bg-bgColor-200 lg:w-90%  w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                   </div>
@@ -102,15 +179,15 @@ const ModifyEmployee = () => {
                         e.target.type = "text";
                       }}
                       name="dob"
-                      // onChange={handleChange}
-                      // value={EmployeeData.dob}
+                      onChange={handleChange}
+                      value={EmployeeData.dob}
                       className="bg-bgColor-200 lg:w-50%  w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                     <select
                       name="gender"
                       id="gender"
-                      // onChange={handleChange}
-                      // value={EmployeeData.gender}
+                      onChange={handleChange}
+                      value={EmployeeData.gender}
                       className="bg-bgColor-200 lg:w-30% w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     >
                       <option value="default">Gender</option>
@@ -136,16 +213,16 @@ const ModifyEmployee = () => {
                         e.target.type = "text";
                       }}
                       name="hire_date"
-                      // value={EmployeeData.hire_date}
-                      // onChange={handleChange}
+                      value={EmployeeData.hire_date}
+                      onChange={handleChange}
                       className="bg-bgColor-200 lg:w-40%  w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                     <input
                       type="text"
                       placeholder="Designation"
                       name="job_title"
-                      // onChange={handleChange}
-                      // value={EmployeeData.job_title}
+                      onChange={handleChange}
+                      value={EmployeeData.job_title}
                       className="bg-bgColor-200 capitalize lg:w-40% w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                   </div>
@@ -155,8 +232,8 @@ const ModifyEmployee = () => {
                       type="number"
                       placeholder="Salary"
                       name="salary"
-                      // onChange={handleChange}
-                      // value={EmployeeData.salary}
+                      onChange={handleChange}
+                      value={EmployeeData.salary}
                       className="bg-bgColor-200 lg:w-90%  w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                   </div>
@@ -166,8 +243,8 @@ const ModifyEmployee = () => {
                       type="text"
                       placeholder="Password"
                       name="password"
-                      // onChange={handleChange}
-                      // value={EmployeeData.password}
+                      onChange={handleChange}
+                      value={EmployeeData.password}
                       className="bg-bgColor-200 lg:w-90%  w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                     <div className="flex justify-start items-center w-90% text-textColor-200 lg:text-base text-xs">

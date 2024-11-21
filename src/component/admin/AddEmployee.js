@@ -7,7 +7,7 @@ const AddEmployee = ({ setEmployees, userCount }) => {
     document.title = `PayrollCentral | Employees | Add `;
   });
 
-  const [FormData, setFormData] = useState();
+  const [FormData, setFormData] = useState({ emp_id: 11001 + userCount });
   const [Submit, setSubmit] = useState(true);
 
   const handleChange = (e) => {
@@ -25,9 +25,31 @@ const AddEmployee = ({ setEmployees, userCount }) => {
   const handleSubmit = async (e) => {
     e.preventdefault();
     if (Submit) {
-      const response = await fetch();
-    } else {
-      
+      const response = await fetch("http://localhost:5000/add", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        method: "POST",
+        body: JSON.stringify(FormData),
+      });
+      const data = await response.json();
+      if (data.status) {
+        alert(data.message);
+        document.getElementById("addEmployeeForm").reset();
+        const employeeResponse = await fetch(
+          "http://localhost:5000/employees",
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+            method: "POST",
+          }
+        );
+        const employeeData = await employeeResponse.json();
+        setEmployees(employeeData);
+      } else {
+        alert(data.message);
+      }
     }
   };
 
@@ -128,8 +150,8 @@ const AddEmployee = ({ setEmployees, userCount }) => {
                       name="emp_id"
                       value={11001 + userCount}
                       disabled
-                      onChange={handleChange}
-                      required
+                      // onChange={handleChange}
+                      // required
                       className="bg-bgColor-200 lg:w-90%  w-90% rounded outline-none border-b border-primary-200 p-2 pl-3 m-2"
                     />
                   </div>

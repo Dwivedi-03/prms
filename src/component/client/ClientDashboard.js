@@ -4,13 +4,14 @@ import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
+import GridViewIcon from "@mui/icons-material/GridView";
 // import SummarizeRoundedIcon from "@mui/icons-material/SummarizeRounded";
 
-const ClientDashboard = () => {
+const ClientDashboard = ({ setEmployees, setSession, User }) => {
   const navigate = useNavigate();
-
   const handleLogOut = () => {
     if (window.confirm("Are you really wanna log out ?")) {
+      setSession(0);
       navigate("/");
     }
   };
@@ -25,7 +26,7 @@ const ClientDashboard = () => {
             to="/Dashboard/"
             className="h-10% lg:p-3 p-2 flex justify-center items-center"
           >
-            <div className="lg:block block lg:bg-logoIcon bg-logoIconSm lg:w-70% w-90%  lg:h-full bg-no-repeat bg-center bg-cover p-5"></div>
+            <GridViewIcon className="text-primary-200" fontSize="large" />
           </Link>
           {/* sidebar middle */}
           <div className="h-80% lg:p-3 p-2 flex flex-col gap-4">
@@ -80,7 +81,7 @@ const ClientDashboard = () => {
               </div>
             </Link>
           </div>
-          {/* sidebar bottm */}
+          {/* sidebar bottom */}
           <div className="h-10% lg:p-3 p-2">
             <div
               onClick={handleLogOut}
@@ -104,7 +105,7 @@ const ClientDashboard = () => {
           <div className="lg:h-10% h-5% bg-bgColor-100 border-b border-bgColor-300 flex justify-end items-center">
             <div className="h-full lg:w-15% w-50% flex justify-center items-center">
               <h1 className="lg:text-xl my-auto capitalize text-primary-200">
-                Welcome,
+                Welcome, {User}
               </h1>
             </div>
           </div>

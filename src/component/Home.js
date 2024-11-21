@@ -4,7 +4,8 @@ import HomeIcon from "@mui/icons-material/Home";
 import PersonIcon from "@mui/icons-material/Person";
 import ReceiptLongIcon from "@mui/icons-material/ReceiptLong";
 import ExitToAppRoundedIcon from "@mui/icons-material/ExitToAppRounded";
-import SummarizeRoundedIcon from "@mui/icons-material/SummarizeRounded";
+// import SummarizeRoundedIcon from "@mui/icons-material/SummarizeRounded";
+import GridViewIcon from "@mui/icons-material/GridView";
 
 function Home() {
   const navigate = useNavigate();
@@ -28,9 +29,7 @@ function Home() {
             to="/home/"
             className="h-10% lg:p-3 p-2 flex justify-center items-center"
           >
-            <div className="lg:block block lg:w-70% w-90% lg:h-full p-5">
-              
-            </div>
+            <GridViewIcon className="text-primary-200" fontSize="large" />
           </Link>
           <div className="h-80% lg:p-3 p-2 flex flex-col gap-4">
             <Link
@@ -45,7 +44,7 @@ function Home() {
               </div>
               <div className="lg:block hidden w-70% text-primary-200">Home</div>
             </Link>
-            <Link
+            {/* <Link
               to="/home/summary"
               className="lg:h-12 h-10 bg-bgColor-200 shadow lg:rounded-lg rounded flex justify-center items-center"
             >
@@ -58,7 +57,7 @@ function Home() {
               <div className="lg:block hidden w-70% text-primary-200">
                 Summary
               </div>
-            </Link>
+            </Link> */}
             <Link
               to="/home/employee"
               className="lg:h-12 h-10 bg-bgColor-200 shadow lg:rounded-lg rounded flex justify-center items-center"
@@ -108,8 +107,7 @@ function Home() {
           <div className="h-5% lg:h10% bg-bgColor-100 border-b border-bgColor-300 flex justify-end items-center">
             <div className="h-full w-50% lg:w-15% flex justify-center items-center">
               <h1 className="lg:text-xl my-auto capitalize text-primary-200">
-                {" "}
-                Welcome, jyoti
+                Welcome, Admin
               </h1>
             </div>
           </div>

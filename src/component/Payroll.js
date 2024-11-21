@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 
-const Payroll = ({ Status }) => {
+const Payroll = ({ lastDate, salaryCount, userCount, setStatus, Status }) => {
   useEffect(() => {
     document.title = `PayCentral | Payroll`;
   });
 
   const handleClick = () => {
     if (window.confirm("Are you want to pay ?")) {
-      alert("Paid");
+      setStatus("Paid");
     }
   };
 
@@ -18,7 +18,7 @@ const Payroll = ({ Status }) => {
   return (
     <>
       <div>
-        <main className="flex justify-center items-center h-full w-full text-textColor-100 overflow-scroll">
+        <main className="flex justify-center items-center h-full w-full text-textColor-100 overflow-hidden">
           <div className="w-90% h-95% flex lg:justify-around justify-start items-center flex-col py-2 overflow-auto">
             <div className="lg:w-60% w-90% h-80% lg:h-full lg:p-2 flex justify-start items-center flex-col border border-bgColor-300 rounded bg-payroll bg-no-repeat bg-center bg-cover ">
               <div className="w-full h-70%">
@@ -53,13 +53,11 @@ const Payroll = ({ Status }) => {
                   <div className="table">
                     <div className="table-row">
                       <div className="table-cell">Employees</div>
-                      {/* <div className="table-cell">: {userCount}</div> */}
-                      <div className="table-cell">: {10000}</div>
+                      <div className="table-cell">: {userCount}</div>
                     </div>
                     <div className="table-row">
                       <div className="table-cell">Total Net Pay</div>
-                      {/* <div className="table-cell">: ₹{salaryCount}</div> */}
-                      <div className="table-cell">: ₹{1000}</div>
+                      <div className="table-cell">: ₹{salaryCount}</div>
                     </div>
                     <div className="table-row">
                       <div className="table-cell">First Day of Month</div>
@@ -67,8 +65,7 @@ const Payroll = ({ Status }) => {
                     </div>
                     <div className="table-row">
                       <div className="table-cell">Last Day of Month</div>
-                      {/* <div className="table-cell">: {lastDate}</div> */}
-                      <div className="table-cell">: {10000}</div>
+                      <div className="table-cell">: {lastDate}</div>
                     </div>
                     <div className="table-row">
                       <div className="table-cell">Total Days</div>
@@ -80,8 +77,7 @@ const Payroll = ({ Status }) => {
                     </div>
                     <div className="table-row">
                       <div className="table-cell">Status</div>
-                      {/* <div className="table-cell">: {Status}</div> */}
-                      <div className="table-cell">: {1000}</div>
+                      <div className="table-cell">: {Status}</div>
                     </div>
                   </div>
                 </div>
